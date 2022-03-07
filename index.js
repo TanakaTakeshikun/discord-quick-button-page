@@ -37,7 +37,7 @@ module.exports = {
     content[a.id] = a.content||["notcontent"];
     loop[a.id] = a.loop||false;
     const buttondata = buttonfunc(1,(loop[a.id])?content[a.id].length-1:0)
-      return {content:content[a.id][0],data:buttondata};
+      return {content:content[a.id][0],data:buttondata,page:1};
     },
     buttonpush:obj=>{
       if(!obj.interaction?.customId)return;
@@ -46,11 +46,11 @@ module.exports = {
        number = Number(id);
       if(obj.interaction.customId.startsWith("BURInext")){
        const buttondata = buttonfunc((number+1>=content[obj.id].length)?(loop[obj.id])?0:number:number+1,number-1);
-       return {content:content[obj.id][number],data:buttondata};
+       return {content:content[obj.id][number],data:buttondata,page:number+1};
       }
       if(obj.interaction.customId.startsWith("BURIback")){
         const buttondata = buttonfunc((content[obj.id].length-1==number)?0:number+1,(number-1<0)?(loop[obj.id])?content[obj.id].length-1:0:number-1);
-        return {content:content[obj.id][number],data:buttondata};
+        return {content:content[obj.id][number],data:buttondata,page:number+1};
        }
        if(obj.interaction.customId.startsWith("BURINOTCONTENTLOAD"))return{content:error?.content||"notcontent",data:errorbutton()};
     }

@@ -15,12 +15,12 @@ const {Client,Intents} = require('discord.js'),
 
   client
   .on('messageCreate',message => {
-  if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
+  if(message.content == "!page")message.reply({embeds:[{description:`page:${button.page},content:${button.content}`}],components:[button.data]});
   })
     .on("interactionCreate",async i=>{
       await i.deferUpdate();
       const getcontent = discord_page.buttonpush({id:"HOGE",interaction:i});
-      i.editReply({embeds:[{description:getcontent.content}],components:[getcontent.data]})
+      i.editReply({embeds:[{description:`page:${getcontent.page},content:${getcontent.content}`}],components:[getcontent.data]})
     })
   .login("YOURTOKEN");
 ```
@@ -42,6 +42,7 @@ loopするかどうかです
 書かない場合はエラーが出ます
 
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+pageが返るようになりました内容はページ数です
 # buttonpush
 ```js
 buttonpush({id:"HOGE",interaction:取得したinteraction})
@@ -54,6 +55,7 @@ setした時と同じIDを使ってください
 interactionCreateイベントで取得した情報を入れてください
 
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+pageが返るようになりました内容はページ数です
 # buttonname
 ボタンの名前が決めれます
 決めない場合はnextとbackです
