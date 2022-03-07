@@ -25,6 +25,23 @@ const {Client,Intents} = require('discord.js'),
   .login("YOURTOKEN");
 ```
 
+# sample(簡易)
+```js
+const {Client,Intents} = require('discord.js'),
+  client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
+  discord_page = require("discord-quick-button-page"),
+  button = discord_page.buttonpage({content:["1","2","3","4"],id:"HOGE"});
+  client
+  .on('messageCreate',message => {
+  if(message.content == "!page")message.reply({content:button.content,components:[button.data]});
+  })
+    .on("interactionCreate",async i=>{
+      await i.deferUpdate();
+      const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
+      i.editReply({content:getbtn.content,components:[getbtn.data]});
+    })
+  .login("YOURTOKEN");
+```
 # buttonpage
 ```js
 buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE"});
