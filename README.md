@@ -53,11 +53,11 @@ setした時と同じIDを使ってください
 `interaction:取得したintaraction`
 interactionCreateイベントで取得した情報を入れてください
 
+返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
 # buttonname
 ボタンの名前が決めれます
 決めない場合はnextとbackです
 
-返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
 # buttonerror
 ```js
 buttonerror({content:"エラーが発生しました",button:"エラー"})
