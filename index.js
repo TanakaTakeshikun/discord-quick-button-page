@@ -41,17 +41,17 @@ module.exports = {
     },
     buttonpush:obj=>{
       if(!obj.interaction?.customId)return;
-      if(!content[obj.id])return{content:error.content||"notcontent",data:errorbutton()};
-      const id = obj.interaction.customId.replace(/[^0-9]/g, '');
+      if(!content[obj.id])return{content:error?.content||"notcontent",data:errorbutton()};
+      const id = obj.interaction.customId.replace(/[^0-9]/g, ''),
+       number = Number(id);
       if(obj.interaction.customId.startsWith("BURInext")){
-       const number = Number(id),
-       buttondata = buttonfunc((number+1>=content[obj.id].length)?(loop[obj.id])?0:number:number+1,number-1);
+       const buttondata = buttonfunc((number+1>=content[obj.id].length)?(loop[obj.id])?0:number:number+1,number-1);
        return {content:content[obj.id][number],data:buttondata};
       }
       if(obj.interaction.customId.startsWith("BURIback")){
-        const number = Number(id),
-        buttondata = buttonfunc((content[obj.id].length-1==number)?0:number+1,(number-1<0)?(loop[obj.id])?content[obj.id].length-1:0:number-1);
+        const buttondata = buttonfunc((content[obj.id].length-1==number)?0:number+1,(number-1<0)?(loop[obj.id])?content[obj.id].length-1:0:number-1);
         return {content:content[obj.id][number],data:buttondata};
        }
+       if(obj.interaction.customId.startsWith("BURINOTCONTENTLOAD"))return{content:error?.content||"notcontent",data:errorbutton()};
     }
   };
