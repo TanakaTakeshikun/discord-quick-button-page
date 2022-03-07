@@ -1,0 +1,32 @@
+{
+  "name": "discord-quick-button-page",
+  "version": "1.0.0",
+  "description": "Discord.jsで簡単にページ式ボタンが作ることができる",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanakataku/discord-quick-button-page.git"
+  },
+  "keywords": [
+    "Discord.js",
+    "discordbutton",
+    "discordpage",
+    "discord-button-page",
+    "discord"
+  ],
+  "author": "buri9515 <discord.buri9515@gmail.com> (https://qiita.com/minecraftomato1/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tanakataku/discord-quick-button-page/issues"
+  },
+  "homepage": "https://github.com/tanakataku/discord-quick-button-page#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}
