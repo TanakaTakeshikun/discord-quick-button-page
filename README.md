@@ -1,5 +1,7 @@
 # discord-quick-button-page
+
 このモジュールはDiscord.jsv13,14で動作を確認しています
+
 (v12,v11はできません)
 
 
@@ -45,53 +47,81 @@ const {Client,Intents} = require('discord.js'),
 ```js
 buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE"});
 ```
+
+
 `loop:boolean`
+
 
 loopするかどうかです
 
+
 書かない場合はfalseになります
+
 
 `content:arr`
 
+
 表示するコンテンツを決めます
+
 
 右から左へページが流れていきます
 
+
 `id:String`
+
 
 複数登録する場合IDを変えて使います
 
+
 書かない場合はエラーが出ます
 
-返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+
+返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
+
+(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+
 
 pageが返るようになりました内容はページ数です
 # buttonpush
 ```js
 buttonpush({id:"HOGE",interaction:取得したinteraction})
 ```
+
 `id:String`
+
 
 setした時と同じIDを使ってください
 
+
 一致しない場合エラーボタンに切り替わります
+
 
 `interaction:interaction-obj`
 
+
 interactionCreateイベントで取得した情報を入れてください
 
-返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+
+返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
+
+(エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+
 
 pageが返るようになりました内容はページ数です
 # buttonname
 ```js
 .buttonname({next:"次へ",back:"前へ"});
 ```
+
+
 `next:String,back:String`
+
 
 ボタンの名前が決めれます
 
-決めない場合はnextとbackです
+
+初期設定は`next:next,back:back`です
+
 
 未設定可
 
@@ -99,11 +129,16 @@ pageが返るようになりました内容はページ数です
 ```js
 buttonerror({content:"エラーが発生しました",button:"エラー"})
 ```
+
+
 `content:String,button:String`
+
 
 IDが一致しない場合に出します
 
-初期設定はcontent:notcontent,button:NOTINFOです
+
+初期設定は`content:notcontent,button:NOTINFO`です
+
 
 未設定可
 
