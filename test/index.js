@@ -11,7 +11,7 @@ const {Client,Intents} = require('discord.js'),
   })
     .on("interactionCreate",async i=>{
       await i.deferUpdate();
-      const getcontent = discord_page.buttonpush({id:"HOGE",interaction:i});
-      i.editReply({embeds:[{description:getcontent.content}],components:[getcontent.data]})
+      const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
+      if(getbtn) i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
     })
   .login(process.env.token);

@@ -1,7 +1,7 @@
 # discord-quick-button-page
-このモジュールはDiscord.jsv13で動作を確認しています
+このモジュールはDiscord.jsv13,14で動作を確認しています
 (v12,v11はできません)
-v14は未確認
+
 
 # sample
 
@@ -15,14 +15,14 @@ const {Client,Intents} = require('discord.js'),
 
   client
   .on('messageCreate',message => {
-  if(message.content == "!page")message.reply({embeds:[{description:`page:${button.page},content:${button.content}`}],components:[button.data]});
+  if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
   })
     .on("interactionCreate",async i=>{
       await i.deferUpdate();
-      const getcontent = discord_page.buttonpush({id:"HOGE",interaction:i});
-      i.editReply({embeds:[{description:`page:${getcontent.page},content:${getcontent.content}`}],components:[getcontent.data]})
+      const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
+      if(getbtn) i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
     })
-  .login("YOURTOKEN");
+  .login(process.env.token);
 ```
 
 # sample(簡易)
@@ -38,7 +38,7 @@ const {Client,Intents} = require('discord.js'),
     .on("interactionCreate",async i=>{
       await i.deferUpdate();
       const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
-      i.editReply({content:getbtn.content,components:[getbtn.data]});
+     if(getbtn) i.editReply({content:getbtn.content,components:[getbtn.data]});
     })
   .login("YOURTOKEN");
 ```

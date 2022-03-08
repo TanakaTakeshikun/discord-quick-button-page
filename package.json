@@ -25,8 +25,5 @@
   "bugs": {
     "url": "https://github.com/tanakataku/discord-quick-button-page/issues"
   },
-  "homepage": "https://github.com/tanakataku/discord-quick-button-page#readme",
-  "dependencies": {
-    "discord.js": "^13.6.0"
-  }
+  "homepage": "https://github.com/tanakataku/discord-quick-button-page#readme"
 }

@@ -1,33 +1,55 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
+//createbyBURI
 let buttonname,
 error,
 content = [],
 loop = [];
-const buttonfunc = (nextid,backid) =>{
-  const data = new MessageActionRow()
-  .addComponents(
-    new MessageButton()
-      .setCustomId(`BURIback${backid}`)
-      .setLabel(buttonname?.back||"back")
-      .setStyle('PRIMARY')
-  )
-  .addComponents(
-    new MessageButton()
-      .setCustomId(`BURInext${nextid}`)
-      .setLabel(buttonname?.next||"next")
-      .setStyle('PRIMARY')
-  );
-  return data;
-},
+const buttonfunc = (nextid,backid) => {
+  return buttonobj({nextid:`BURInext${nextid}`,nextlabel:buttonname?.next||"next",backid:`BURIback${backid}`,backlabel:buttonname?.back||"back"})
+};
   errorbutton = ()=>{
-    const data = new MessageActionRow()
-  .addComponents(
-    new MessageButton()
-      .setCustomId(`BURINOTCONTENTLOAD`)
-      .setLabel(error.button||"NOTINFO")
-      .setStyle('DANGER')
-  );
-    return data
+    return buttonobj({errorlabel:error.button||"NOTINFO"})
+  },
+  buttonobj = button =>{
+    if(button.errorlabel){
+     return {
+      components: [
+        {
+          custom_id: 'BURINOTCONTENTLOAD',
+          disabled: false,
+          emoji: null,
+          label: button.errorlabel,
+          style: 4,
+          type: 2,
+          url: null
+        }
+      ],
+      type: 1
+    }
+    }else{
+      return {
+        components: [
+          {
+            custom_id:button.backid,
+            disabled: false,
+            emoji: null,
+            label: button.backlabel,
+            style: 1,
+            type: 2,
+            url: null
+          },
+          {
+            custom_id: button.nextid,
+            disabled: false,
+            emoji: null,
+            label: button.nextlabel,
+            style: 1,
+            type: 2,
+            url: null
+          }
+        ],
+        type: 1
+      };
+    }
   }
 module.exports = {
     buttonerror: e => error = e,
