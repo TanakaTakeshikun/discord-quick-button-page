@@ -23,12 +23,12 @@ const {Client,Intents} = require('discord.js'),
       if(i.customId.startsWith("hoge")){
       await i.deferUpdate();
       const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
-      if(getbtn) i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
+       i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
       }
       if(i.customId.startsWith("test")){
        await i.deferUpdate();
       const getbtn = discord_page.buttonpush({id:"test",interaction:i});
-      if(getbtn) i.editReply({embeds:[{description:getbtn.content+getbtn.page}],components:[getbtn.data]});
+       i.editReply({embeds:[{description:getbtn.content+getbtn.page}],components:[getbtn.data]});
       }
     })
   .login("YOURTOKEN");

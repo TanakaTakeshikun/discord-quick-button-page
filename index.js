@@ -17,11 +17,9 @@ const buttonfunc = (nextid,backid,obj) => {
         {
           custom_id: 'BURINOTCONTENTLOAD',
           disabled: false,
-          emoji: null,
           label: button.errorlabel,
           style: 4,
           type: 2,
-          url: null
         }
       ],
       type: 1
@@ -32,20 +30,16 @@ const buttonfunc = (nextid,backid,obj) => {
           {
             custom_id:button.backid,
             disabled: false,
-            emoji: null,
             label: button.backlabel,
             style: 1,
             type: 2,
-            url: null
           },
           {
             custom_id: button.nextid,
             disabled: false,
-            emoji: null,
             label: button.nextlabel,
             style: 1,
             type: 2,
-            url: null
           }
         ],
         type: 1
