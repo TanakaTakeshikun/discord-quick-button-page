@@ -12,16 +12,24 @@ const {Client,Intents} = require('discord.js'),
   discord_page = require("discord-quick-button-page");
   discord_page.buttonname({next:"次へ",back:"前へ"});
   discord_page.buttonerror({content:"エラーが発生しました",button:"エラー"});
-  const button = discord_page.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE"});
-
+  const button = discord_page.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
+  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"}});
   client
   .on('messageCreate',message => {
   if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
+    if(message.content=="!page2")message.reply({embeds:[{description:button2.content}],components:[button2.data]});
   })
     .on("interactionCreate",async i=>{
+      if(i.customId.startsWith("hoge")){
       await i.deferUpdate();
       const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
       if(getbtn) i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
+      }
+      if(i.customId.startsWith("test")){
+       await i.deferUpdate();
+      const getbtn = discord_page.buttonpush({id:"test",interaction:i});
+      if(getbtn) i.editReply({embeds:[{description:getbtn.content+getbtn.page}],components:[getbtn.data]});
+      }
     })
   .login("YOURTOKEN");
 ```
@@ -45,7 +53,7 @@ const {Client,Intents} = require('discord.js'),
 ```
 # buttonpage
 ```js
-buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE"});
+buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
 ```
 
 
@@ -75,6 +83,15 @@ loopするかどうかです
 
 書かない場合はエラーが出ます
 
+**customid**
+
+`next:String`
+
+customId(進むボタン)の設定ができます(しない場合はBURInext)
+
+`back:String`
+
+customId(戻るボタン)の設定ができます(しない場合はBURIback)
 
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
 
@@ -141,6 +158,19 @@ IDが一致しない場合に出します
 
 
 未設定可
+
+
+```js
+buttoncustomid({next:"hogenext",back:"hogeback"});
+```
+
+customIDを決めれます
+
+**注意**
+
+customIDは指定のcustomID+現在のページ番号です
+
+初期はBURInextorback+ページ番号
 
 
 
