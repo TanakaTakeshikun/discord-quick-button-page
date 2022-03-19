@@ -1,6 +1,6 @@
 {
   "name": "discord-quick-button-page",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Discord.jsで簡単にページ式ボタンが作ることができる",
   "main": "index.js",
   "directories": {
