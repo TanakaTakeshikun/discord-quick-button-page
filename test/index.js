@@ -1,76 +1,24 @@
-//createbyBURI
-let buttonname,
-error,
-content = [],
-loop = [],
-customid=[];
-const buttonfunc = (nextid,backid,obj,name) => {
-  return buttonobj({nextid:`${obj.next}${nextid}`,nextlabel:name.next,backid:`${obj.back}${backid}`,backlabel:name.back})
-};
-  errorbutton = ()=>{
-    return buttonobj({errorlabel:error.button||"NOTINFO"})
-  },
-  buttonobj = button =>{
-    if(button.errorlabel){
-     return {
-      components: [
-        {
-          custom_id: 'BURINOTCONTENTLOAD',
-          disabled: false,
-          label: button.errorlabel,
-          style: 4,
-          type: 2,
-        }
-      ],
-      type: 1
-    }
-    }else{
-      return {
-        components: [
-          {
-            custom_id:button.backid,
-            disabled: false,
-            label: button.backlabel,
-            style: 1,
-            type: 2,
-          },
-          {
-            custom_id: button.nextid,
-            disabled: false,
-            label: button.nextlabel,
-            style: 1,
-            type: 2,
-          }
-        ],
-        type: 1
-      };
-    }
-  }
-module.exports = {
-    buttonerror: e => error = e,
-    buttonpage: a =>{
-      if(!a.id) throw new Error('dont know id');
-    content[a.id] = a.content||["notcontent"];
-    loop[a.id] = a.loop||false,
-    customid[a.id]=a.customid||{back:"BURIback",next:"BURInext"},
-    buttonname[a.id]=a.name||{back:"back",next:"next"};
-    const buttondata = buttonfunc(1,(loop[a.id])?content[a.id].length-1:0,{back:a.customid?.back||"BURIback",next:a.customid?.next||"BURInext"},{next:a.name?.next||"next",back:a.name?.back||"back"})
-      return {content:content[a.id][0],data:buttondata,page:1};
-    },
-    buttonpush:obj=>{
-      if (!obj.interaction.isButton())return 0;
-      if(!obj.id) throw new Error('dont know id');
- if(!content[obj.id])return{content:error?.content||"notcontent",data:errorbutton()};
-      const id = obj.interaction.customId.replace(/[^0-9]/g, ''),
-       number = Number(id);
-      if(obj.interaction.customId.startsWith(customid[obj.id]?.next||"BURInext")){
-       const buttondata = buttonfunc((number+1>=content[obj.id].length)?(loop[obj.id])?0:number:number+1,number-1,{back:customid[obj.id]?.back||"BURIback",next:customid[obj.id]?.next||"BURInext"},{next:buttonname[obj.id]?.next||"next",back:buttonname[obj.id]?.back||"back"});
-       return {content:content[obj.id][number],data:buttondata,page:number+1};
+const {Client,Intents} = require('discord.js'),
+  client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
+  discord_page = require("./mod.js");
+  discord_page.buttonerror({content:"エラーが発生しました",button:"エラー"});
+  const button = discord_page.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
+  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"},name:{next:"次へ",back:"前へ"}});
+  client
+  .on('messageCreate',message => {
+  if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
+    if(message.content=="!page2")message.reply({embeds:[{description:button2.content}],components:[button2.data]});
+  })
+    .on("interactionCreate",async i=>{
+      if(i.customId.startsWith("hoge")){
+      await i.deferUpdate();
+      const getbtn = discord_page.buttonpush({id:"HOGE",interaction:i});
+       i.editReply({embeds:[{description:getbtn.content}],components:[getbtn.data]});
       }
-      if(obj.interaction.customId.startsWith(customid[obj.id]?.back||"BURIback")){
-        const buttondata = buttonfunc((content[obj.id].length-1==number)?0:number+1,(number-1<0)?(loop[obj.id])?content[obj.id].length-1:0:number-1,{back:customid[obj.id]?.back||"BURIback",next:customid[obj.id]?.next||"BURInext"},{next:buttonname[obj.id]?.next||"next",back:buttonname[obj.id]?.back||"back"});
-        return {content:content[obj.id][number],data:buttondata,page:number+1};
-       }
-       if(obj.interaction.customId.startsWith("BURINOTCONTENTLOAD"))return{content:error?.content||"notcontent",data:errorbutton()};
-    }
-  };
+      if(i.customId.startsWith("test")){
+       await i.deferUpdate();
+      const getbtn = discord_page.buttonpush({id:"test",interaction:i});
+       i.editReply({embeds:[{description:getbtn.content+getbtn.page}],components:[getbtn.data]});
+      }
+    })
+  .login(process.env.token);

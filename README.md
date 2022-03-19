@@ -10,10 +10,9 @@
 const {Client,Intents} = require('discord.js'),
   client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
   discord_page = require("discord-quick-button-page");
-  discord_page.buttonname({next:"次へ",back:"前へ"});
   discord_page.buttonerror({content:"エラーが発生しました",button:"エラー"});
   const button = discord_page.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
-  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"}});
+  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"},name:{next:"次へ",back:"前へ"}});
   client
   .on('messageCreate',message => {
   if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
@@ -53,7 +52,7 @@ const {Client,Intents} = require('discord.js'),
 ```
 # buttonpage
 ```js
-buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
+buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"},name:{next:"nextpage",back:"backpage"}});
 ```
 
 
@@ -92,6 +91,16 @@ customId(進むボタン)の設定ができます(しない場合はBURInext)
 `back:String`
 
 customId(戻るボタン)の設定ができます(しない場合はBURIback)
+
+**name**
+
+ボタンの名前が決められます
+
+`next:String`
+
+`back:String`
+
+初期はnextとbackです
 
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
 

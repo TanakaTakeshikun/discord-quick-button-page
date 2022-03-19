@@ -1,5 +1,5 @@
 //createbyBURI
-let buttonname,
+let buttonname=[],
 error,
 content = [],
 loop = [],
@@ -50,7 +50,6 @@ module.exports = {
     buttonerror: e => error = e,
     buttonpage: a =>{
       if(!a.id) throw new Error('dont know id');
-      if(!a.content) throw new Error('dont know content');
     content[a.id] = a.content||["notcontent"];
     loop[a.id] = a.loop||false,
     customid[a.id]=a.customid,
