@@ -10,9 +10,16 @@
 const {Client,Intents} = require('discord.js'),
   client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
   discord_page = require("discord-quick-button-page");
+  jsondata={
+    custom_id:"hage",
+    disabled: true,
+    label: "捨てる",
+    style: 1,
+    type: 2,
+  };
   discord_page.buttonerror({content:"エラーが発生しました",button:"エラー"});
   const button = discord_page.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"}});
-  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"},name:{next:"次へ",back:"前へ"}});
+  const button2 = discord_page.buttonpage({content:["a","b","c","d"],id:"test",customid:{next:"testnext",back:"testback"},name:{next:"次へ",back:"前へ"},json:jsondata});
   client
   .on('messageCreate',message => {
   if(message.content == "!page")message.reply({embeds:[{description:button.content}],components:[button.data]});
@@ -26,7 +33,7 @@ const {Client,Intents} = require('discord.js'),
       }
       if(i.customId.startsWith("test")){
        await i.deferUpdate();
-      const getbtn = discord_page.buttonpush({id:"test",interaction:i});
+      const getbtn = discord_page.buttonpush({id:"test",interaction:i,json:jsondata});
        i.editReply({embeds:[{description:getbtn.content+getbtn.page}],components:[getbtn.data]});
       }
     })
@@ -52,7 +59,7 @@ const {Client,Intents} = require('discord.js'),
 ```
 # buttonpage
 ```js
-buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"},name:{next:"nextpage",back:"backpage"}});
+buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"},name:{next:"nextpage",back:"backpage"},json:{custom_id:"hage",label:"hoge",style: 1,type:2}});
 ```
 
 
@@ -103,6 +110,23 @@ customId(戻るボタン)の設定ができます(しない場合はBURIback)
 初期はnextとbackです
 
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
+
+
+**高度な設定**
+
+`json:discord.js-jsonobj(components[ここの内容])`
+
+オリジナルのボタンを追加するときに設定します
+
+componentsのなかのjsonを入れてください(自動でpushします)
+
+データ型を見るにはまずDiscord.jsで普通にボタンを作成します
+
+作成したクラス.toJSON()でデータが得られます
+
+記入しない場合は何も起こりません
+
+間違えている場合はDiscord.js側でエラーが出ます
 
 (エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
 
