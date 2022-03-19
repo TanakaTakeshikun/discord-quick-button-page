@@ -9,7 +9,7 @@
 ```js
 const {Client,Intents} = require('discord.js'),
   client = new Client({intents:[Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]}),
-  discord_page = require("discord-quick-button-page");
+  discord_page = require("discord-quick-button-page"),
   jsondata={
     custom_id:"hage",
     disabled: true,
