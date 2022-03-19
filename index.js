@@ -38,9 +38,7 @@ const buttonfunc = (nextid,backid,obj,name,json) => {
       ],
       type: 1
     };
-    if(button.json){
-      data.components.push(button.json)
-    }
+    if(button.json)data.components.push(button.json);
     return data;
   }
   }
