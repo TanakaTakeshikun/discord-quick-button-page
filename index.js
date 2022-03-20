@@ -46,8 +46,8 @@ module.exports = {
     buttonerror: e => error = e,
     buttonpage: a =>{
       if(!a.id) throw new Error('dont know id');
-    data[a.id]={buttonname:a.name||{next:"next",back:"back"},customid:a.customid||{next:"BURInext",back:"BURIback"},loop:a.loop||false,content:a.content||["not cotent"]}
-    const buttondata = buttonfunc(1,(data[a.id].loop)?data[a.id].content.length-1:0,{back:data[a.id].customid.back,next:data[a.id].customid.next},{next:data[a.id].name.next,back:data[a.id].name.back},a.json)
+    data[a.id]={buttonname:{next:a.name?.next||"next",back:a.name?.back||"back"},customid:{next:a.customid?.next||"BURInext",back:a.customid?.back||"BURIback"},loop:a.loop||false,content:a.content||["not cotent"]}
+    const buttondata = buttonfunc(1,(data[a.id].loop)?data[a.id].content.length-1:0,{back:data[a.id].customid.back,next:data[a.id].customid.next},{next:data[a.id].buttonname.next,back:data[a.id].buttonname.back},a.json)
       return {content:data[a.id].content[0],data:buttondata,page:1};
     },
     buttonpush:obj=>{
