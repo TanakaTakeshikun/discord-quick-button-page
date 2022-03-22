@@ -59,7 +59,7 @@ const {Client,Intents} = require('discord.js'),
 ```
 # buttonpage
 ```js
-buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"},name:{next:"nextpage",back:"backpage"},json:{custom_id:"hage",label:"hoge",style: 1,type:2}});
+.buttonpage({loop:true,content:["1","2","3","4"],id:"HOGE",customid:{next:"hogenext",back:"hogeback"},name:{next:"nextpage",back:"backpage"},json:{custom_id:"hage",label:"hoge",style: 1,type:2}});
 ```
 
 
@@ -109,9 +109,6 @@ customId(戻るボタン)の設定ができます(しない場合はBURIback)
 
 初期はnextとbackです
 
-返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
-
-
 **高度な設定**
 
 `json:discord.js-jsonobj(components[ここの内容])`
@@ -130,11 +127,20 @@ componentsのなかのjsonを入れてください(自動でpushします)
 
 (エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
 
+**返り値**
 
-pageが返るようになりました内容はページ数です
+**content**
+配列の次のページ数のコンテンツを返します
+
+**data**
+ボタンのJSON型のデータを返します
+
+**page**
+現在のページ数を返します
+
 # buttonpush
 ```js
-buttonpush({id:"HOGE",interaction:取得したinteraction})
+.buttonpush({id:"HOGE",interaction:取得したinteraction})
 ```
 
 `id:String`
@@ -155,9 +161,17 @@ interactionCreateイベントで取得した情報を入れてください
 返り値はcontentが登録した情報のcontentの0番目でdataがボタンの情報です
 
 (エラーの場合は登録したエラー又は初期設定のエラーが表示されます)
+**返り値**
 
+**content**
+配列の次のページ数のコンテンツを返します
 
-pageが返るようになりました内容はページ数です
+**data**
+ボタンのJSON型のデータを返します
+
+**page**
+現在のページ数を返します
+
 # buttonname
 ```js
 .buttonname({next:"次へ",back:"前へ"});
@@ -175,9 +189,13 @@ pageが返るようになりました内容はページ数です
 
 未設定可
 
+**返り値**
+
+なし
+
 # buttonerror
 ```js
-buttonerror({content:"エラーが発生しました",button:"エラー"})
+.buttonerror({content:"エラーが発生しました",button:"エラー"})
 ```
 
 
@@ -192,9 +210,11 @@ IDが一致しない場合に出します
 
 未設定可
 
+**返り値**
 
+なし
 ```js
-buttoncustomid({next:"hogenext",back:"hogeback"});
+.buttoncustomid({next:"hogenext",back:"hogeback"});
 ```
 
 customIDを決めれます
@@ -205,5 +225,6 @@ customIDは指定のcustomID+現在のページ番号です
 
 初期はBURInextorback+ページ番号
 
+これの活用方法はcustomIDを指定していちいち関数を呼ばないことで処理の軽減を図れます
 
 
