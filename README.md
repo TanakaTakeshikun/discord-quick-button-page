@@ -111,7 +111,7 @@ customId(戻るボタン)の設定ができます(しない場合はBURIback)
 
 **高度な設定**
 
-`json:discord.js-jsonobj(components[ここの内容])`
+`json:discord.js-json型`
 
 オリジナルのボタンを追加するときに設定します
 
@@ -140,7 +140,7 @@ componentsのなかのjsonを入れてください(自動でpushします)
 
 # buttonpush
 ```js
-.buttonpush({id:"HOGE",interaction:取得したinteraction})
+.buttonpush({id:"HOGE",interaction:取得したinteraction class})
 ```
 
 `id:String`
@@ -152,7 +152,7 @@ setした時と同じIDを使ってください
 一致しない場合エラーボタンに切り替わります
 
 
-`interaction:interaction-obj`
+`interaction:interaction-class`
 
 
 interactionCreateイベントで取得した情報を入れてください
