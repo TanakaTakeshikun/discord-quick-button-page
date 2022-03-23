@@ -231,4 +231,4 @@ customIDは指定のcustomID+現在のページ番号です
 
 # 実行の様子
 
-![実行写真](https://media.discordapp.net/attachments/949959150585151522/956134423458381834/unknown.png "サンプル")
+![実行写真](https://media.discordapp.net/attachments/949959150585151522/956134423458381834/unknown.png "aサンプル")
