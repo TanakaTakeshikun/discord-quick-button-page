@@ -228,3 +228,7 @@ customIDは指定のcustomID+現在のページ番号です
 これの活用方法はcustomIDを指定していちいち関数を呼ばないことで処理の軽減を図れます
 
 
+
+# 実行の様子
+
+![実行写真](https://media.discordapp.net/attachments/949959150585151522/956134423458381834/unknown.png "サンプル")
